@@ -8,7 +8,7 @@ function JobLists({jobs =[]})
                     <h3>{job.title}</h3>
                     <p>{job.company_name}</p>
                     <p>{job.location}</p>
-                    <a href={job.url} target="_blank" rel="noopener noreferrer">
+                    <a href={job.url} target="_blank" rel="noopener noreferrer" className="apply-btn">
                         Apply Now
                     </a>
                 </div>

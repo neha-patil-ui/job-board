@@ -16,6 +16,12 @@ function App() {
   const[jobs, setJobs]= useState([]);
   const [isLoading, setIsLoading]= useState(true);
 
+  const [search, setSearch]= useState("");
+  const filteredJobs= jobs.filter(job =>
+    job.title.toLowerCase().includes(search.toLowerCase())
+  );
+
+
 useEffect(() => {
   fetch('https://www.arbeitnow.com/api/job-board-api')
       .then(res => res.json())
@@ -32,12 +38,18 @@ useEffect(() => {
       <header className="header">
         <h1>Job Board</h1>
         <p>Find your next frontend role</p>
+        <input 
+            type="text"
+            placeholder="Search jobs..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="search-input"/>
       </header>
 
       {isLoading ? (
-        <p style={{ textAlign :'center'}}> Loading Jobs..</p>
+        <p className="loading"> Loading Jobs..</p>
       ) :(
-        <JobLists jobs={jobs}/>
+        <JobLists jobs={filteredJobs}/>
       )}
     </div>
   );
